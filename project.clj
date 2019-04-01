@@ -12,8 +12,8 @@
                  [hiccups "0.3.0"]
 
                  ;; fif libraries
-                 [fif "1.3.0"]
-                 [fifql "1.3.0"]
+                 [fif      "1.3.0"]
+                 [fifql    "1.3.0"]
                  [fifql-fx "1.3.0"]]
 
   :plugins [[lein-cljsbuild "1.1.5"]
@@ -23,25 +23,21 @@
 
   :uberjar-name "fifiql-server.jar"
 
-  :repl-options {:init-ns fifiql.dev.core}
-
   :cljsbuild {:builds
               [{:id "app"
-                :source-paths ["src/cljs" "src/cljc" "dev"]
-
+                :source-paths ["src" "dev"]
                 :figwheel true
-
                 :compiler {:main fifiql.core
                            :asset-path "/js/compiled/out"
                            :output-to "resources/public/js/compiled/fifiql.js"
                            :output-dir "resources/public/js/compiled/out"
-                           :optimizations :simple
+                           :optimizations :none
                            :source-map-timestamp true}}]}
 
 
   :profiles 
   {:dev 
-   {:main fifqli.commandline
+   {:main fifiql.dev.server
     :source-paths ["src" "dev"]
     :dependencies [[org.clojure/core.async "0.4.490"]
                    [mount "0.1.16"]
@@ -49,8 +45,7 @@
                    [compojure "1.6.1"]
                    [http-kit "2.3.0"]]
     :plugins [[lein-cljsbuild "1.1.7"]
-              [lein-ancient "0.6.15"]
-              [com.bhauman/figwheel-main "0.2.0"]
-              [com.bhauman/rebel-readline-cljs "0.1.4"]]
-    :repl-options {:init-ns fifql.dev.user
+              [lein-figwheel "0.5.18"]
+              [lein-ancient "0.6.15"]]
+    :repl-options {:init-ns fifiql.dev.user
                    :port 9005}}})
