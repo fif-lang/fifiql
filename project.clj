@@ -12,9 +12,9 @@
                  [hiccups "0.3.0"]
 
                  ;; fif libraries
-                 [fif      "1.3.0"]
-                 [fifql    "1.3.0"]
-                 [fifql-fx "1.3.0"]]
+                 [fif-lang/fif      "1.3.0"]
+                 [fif-lang/fifql    "1.3.0"]
+                 [fif-lang/fifql-fx "1.3.0"]]
 
   :plugins [[lein-cljsbuild "1.1.5"]
             [lein-ancient "0.6.15"]]
