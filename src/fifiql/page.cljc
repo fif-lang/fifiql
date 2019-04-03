@@ -19,4 +19,5 @@
      [:div#app
       [:div.loading
        [:span "Loading..."]]]
-     [:script {:src "/js/compiled/fifiql.js"}]]]))
+     [:script {:type "text/javascript" :src "/js/compiled/fifiql.js"}]
+     [:script {:type "text/javascript"} "fifiql.core.init();"]]]))

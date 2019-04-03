@@ -1,4 +1,6 @@
-(ns fifiql.ui.layout)
+(ns fifiql.ui.layout
+  (:require
+   [fifiql.ui.component.sidebar :as sidebar]))
 
 
 (defn base-layout []
@@ -13,8 +15,7 @@
     [:div.stdlib-toggle
      [:span "Show Stdlib Words"]
      [:input {:type "checkbox"}]]
-    [:div.search-listing
-     "Search Listing"]]
+    [sidebar/search-listing]]
    [:div.editor
     [:textarea.editor-area]]
    [:div.sidebar-info "sidebar-info"]

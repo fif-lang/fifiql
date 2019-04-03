@@ -50,9 +50,14 @@
   (GET "/fifiql" req (fifiql.page/main)))
 
 
+(def site-config
+  (-> site-defaults
+      (assoc-in [:security :anti-forgery] false)))
+
+
 (def app
   (-> app-routes
-      (wrap-defaults site-defaults)))
+      (wrap-defaults site-config)))
 
 
 (defn start []
