@@ -27,3 +27,21 @@
  ::editor-text
  (fn [db _]
    (:editor-text db)))
+
+
+(re/reg-sub
+ ::result-stack
+ (fn [db _]
+   (:result-stack db)))
+
+
+(re/reg-sub
+ ::result-stdout
+ (fn [db _]
+   (:result-stdout db)))
+
+
+(re/reg-sub
+ ::result-stderr
+ (fn [db _]
+   (:result-stderr db)))

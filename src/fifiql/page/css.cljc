@@ -7,6 +7,8 @@
    [fifiql.page.css.font :as css.font]))
 
 
+(def info-height 220)
+
 (defn generate-css []
   (garden/css
    [:*
@@ -34,7 +36,7 @@
      'sidebar         editor'
      'sidebar-info    editor-info'
      "
-     :grid-template-rows "50px 3fr 1fr"
+     :grid-template-rows (str "50px 1fr " info-height "px")
      :grid-template-columns "400px 1fr"}
 
     [:.loading
@@ -158,7 +160,7 @@
      'doc   doc'
      "
      :grid-template-rows "2em 1fr"
-     :grid-template-columns "2fr 1fr"
+     :grid-template-columns "minmax(1fr, 2fr) minmax(1fr, 2fr)"
      :background-color (color/lighten css.color/orange 20)
      :padding [[(em 0.5) (em 1.0)]]}
     [:.name
@@ -195,10 +197,22 @@
      {:grid-area :stack
       :border-right-width (em 0.5)
       :border-right-style :solid
-      :border-right-color css.color/green}]
+      :border-right-color css.color/green}
+     [:.container
+      {:font-family css.font/monospace
+       :overflow-y :auto
+       :height (px info-height)}]]
     [:.stdout
      {:grid-area :stdout
-      :background-color (color/lighten css.color/blue 35)}]
+      :background-color (color/lighten css.color/blue 35)}
+     [:.container
+      {:font-family css.font/monospace
+       :overflow-y :auto
+       :height (px (/ info-height 2))}]]
     [:.stderr
      {:grid-area :stderr
-      :background-color (color/lighten css.color/orange 30)}]]))
+      :background-color (color/lighten css.color/orange 30)}
+     [:.container
+      {:font-family css.font/monospace
+       :overflow-y :auto
+       :height (px (/ info-height 2))}]]]))

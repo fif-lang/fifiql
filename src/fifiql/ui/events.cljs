@@ -46,7 +46,6 @@
 (re/reg-event-fx
  ::process-query
  (fn [{:keys [db]} [_ result]]
-   (println result)
    {:db (assoc db
                :result-stack (:stack result)
                :result-stdout (:stdout result)

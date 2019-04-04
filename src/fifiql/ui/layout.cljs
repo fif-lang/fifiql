@@ -29,6 +29,6 @@
        [:div.sidebar-info
         [sidebar/word-info]]
        [:div.editor-info
-        [:div.stack "stack"]
-        [:div.stdout "stdout"]
-        [:div.stderr "stderr"]]])))
+        [:div.stack [editor/stack-info]]
+        [:div.stdout [editor/stdout-info]]
+        [:div.stderr [editor/stderr-info]]]])))
