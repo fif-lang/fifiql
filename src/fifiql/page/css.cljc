@@ -27,8 +27,8 @@
 
    [:#app
     {:display :grid
-     :width "100vw"
-     :height "100vh"
+     :width "100%"
+     :height "100%"
      :grid-template-areas "
      'sidebar-header  editor-header'
      'sidebar         editor'
@@ -78,6 +78,7 @@
 
    [:.sidebar
     {:display :grid
+     :height "100%"
      :grid-area :sidebar
      :background-color css.color/orange
      :grid-template-areas "
@@ -100,8 +101,38 @@
       {:margin (em 0.3)}]]
 
     [:.search-listing
-     {:grid-area :search-listing
-      :background-color (color/lighten css.color/orange 10)}]]
+     {:position :relative
+      :max-height (px 650)
+      :grid-area :search-listing
+      :background-color (color/lighten css.color/orange 20)
+      :overflow-y :scroll}
+     [:.group-container
+      {:display :flex
+       :flex-direction :column}
+      [:.group
+       {:display :flex
+        :flex-direction :row
+        :cursor :pointer
+        :background-color (color/lighten css.color/orange 15)}
+       [:&:hover
+        {:color (color/lighten css.color/orange 40)}]
+       [:.icon
+        {:text-align :center
+         :width (em 1.5)}]
+       [:.label
+        {:padding (em 0.1)
+         :padding-left (em 0.3)
+         :font-weight "bold"}]]
+      [:.word
+       {:display :flex
+        :align-items :center
+        :cursor :pointer
+        :padding (em 0.1)
+        :padding-left (em 2.0)}
+       [:&:hover
+        {:background-color (color/lighten css.color/orange 25)}]
+       [:&.active
+        {:color css.color/blue}]]]]]
 
    [:.editor
     {:display :grid
@@ -120,8 +151,35 @@
       :border :none}]]
 
    [:.sidebar-info
-    {:grid-area :sidebar-info
-     :background-color (color/lighten css.color/orange 20)}]
+    {:display :grid
+     :grid-area :sidebar-info
+     :grid-template-areas "
+     'name  group'
+     'doc   doc'
+     "
+     :grid-template-rows "2em 1fr"
+     :grid-template-columns "2fr 1fr"
+     :background-color (color/lighten css.color/orange 20)
+     :padding [[(em 0.5) (em 1.0)]]}
+    [:.name
+     {:display :flex
+      :align-items :center
+      :grid-area :name
+      :font-family css.font/serif
+      :font-weight :bold
+      :font-size (em 1.2)}]
+
+    [:.group
+     {:display :flex
+      :align-items :center
+      :justify-content :flex-end
+      :grid-area :group
+      :font-style :italic}]
+
+    [:.documentation
+     {:grid-area :doc
+      :font-family :monospace
+      :padding-top (em 0.5)}]]
 
    [:.editor-info
     {:display :grid
