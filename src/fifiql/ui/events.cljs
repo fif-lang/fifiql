@@ -50,4 +50,16 @@
                :result-stack (:stack result)
                :result-stdout (:stdout result)
                :result-stderr (:stderr result))}))
-                    
+
+
+(re/reg-event-fx
+ ::toggle-stdlib-words
+ (fn [{:keys [db]} _]
+   (let [toggle (:toggle-stdlib? db)]
+     {:db (assoc db :toggle-stdlib? (not toggle))})))
+
+
+(re/reg-event-fx
+ ::set-search-string
+ (fn [{:keys [db]} [_ search-string]]
+   {:db (assoc db :search-string search-string)}))

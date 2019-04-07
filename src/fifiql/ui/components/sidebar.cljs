@@ -1,5 +1,6 @@
 (ns fifiql.ui.component.sidebar
   (:require
+   [clojure.string :as str]
    [re-frame.core :as re]
    [reagent.core :as r]
    [fifiql.ui.subs :as ui.subs]
@@ -9,7 +10,7 @@
 
 (defn group-listing [group words]
   (let [word-info (re/subscribe [::ui.subs/word-info])
-        open? (r/atom false)]
+        open? (r/atom open?)]
     (fn [group words]
       [:div.group-container {:key (str "container-" group)}
        [:div.group {:key (str "group-" group)
@@ -26,10 +27,30 @@
              (pr-str (:name word))])))])))
 
 
+(defn- process-search-query [search-string word-listing]
+  (if-not (empty? search-string)
+    (filter (fn [{:keys [group name]}]
+              (or (str/includes? (str group) search-string)
+                  (str/includes? (str name) search-string)))
+            word-listing)
+    word-listing))
+
+
+(defn- process-word-listing [word-listing stdlib? search-string]
+  (if stdlib?
+    (group-by :group word-listing)
+    (->> word-listing
+         (filter #(not (:stdlib? %)))
+         (process-search-query search-string)
+         (group-by :group))))
+
+
 (defn search-listing []
-  (let [word-listing (re/subscribe [::ui.subs/word-listing])]
+  (let [toggle-stdlib? (re/subscribe [::ui.subs/toggle-stdlib?])
+        word-listing (re/subscribe [::ui.subs/word-listing])
+        search-string (re/subscribe [::ui.subs/search-string])]
     (fn []
-      (let [groupings (group-by :group @word-listing)]
+      (let [groupings (process-word-listing @word-listing @toggle-stdlib? @search-string)]
         [:div.search-listing
          (doall
           (for [[group words] (sort groupings)]
@@ -39,8 +60,9 @@
 (defn word-info []
   (let [word-meta (re/subscribe [::ui.subs/word-meta])]
     (fn []
-      (when @word-meta
+      (if @word-meta
         [:<>
          [:div.name (pr-str (:name @word-meta))]
          [:div.group (pr-str (:group @word-meta))]
-         [:div.documentation (:doc @word-meta)]]))))
+         [:div.documentation (:doc @word-meta)]]
+        [:div.empty "Word Info"]))))

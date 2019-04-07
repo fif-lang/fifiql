@@ -9,6 +9,15 @@
 
 (def info-height 220)
 
+
+(def no-select
+  [:&
+   {:-webkit-user-select :none
+    :-moz-user-select :none
+    :-ms-user-select :none
+    :user-select :none}])
+
+
 (defn generate-css []
   (garden/css
    [:*
@@ -17,12 +26,14 @@
      :padding 0}]
    
    [:html
-    {:width "100vw"
-     :height "100vh"}]
+    {:width "100%"
+     :height "100%"
+     :overflow :hidden}]
 
    [:body  
-    {:width "100vw"
-     :height "100vh"
+    {:width "100%"
+     :height "100%"
+     :overflow :hidden
      :font-family css.font/sans-serif
      :color css.color/black
      :background-color css.color/off-white}]
@@ -31,6 +42,7 @@
     {:display :grid
      :width "100%"
      :height "100%"
+     :overflow :hidden
      :grid-template-areas "
      'sidebar-header  editor-header'
      'sidebar         editor'
@@ -72,11 +84,19 @@
      :grid-template-columns "1fr 120px"
      :background-color css.color/blue}
     [:.query-button
+     no-select
      {:grid-area :query-button
       :background-color (color/lighten css.color/blue 20)
       :display :flex
       :justify-content :center
-      :align-items :center}]]
+      :align-items :center
+      :cursor :pointer}
+     [:&:hover
+      {:color "#4d4d4d"
+       :background-color (color/lighten css.color/blue 25)}]
+     [:&:active
+      {:color "#4d4d4d"
+       :background-color (color/lighten css.color/blue 15)}]]]
 
    [:.sidebar
     {:display :grid
@@ -95,10 +115,12 @@
       :padding (em 0.3)}]
 
     [:.stdlib-toggle
+     no-select
      {:grid-area :stdlib-toggle
       :display :flex
       :justify-content :center
-      :align-items :center}
+      :align-items :center
+      :cursor :pointer}
      [:input
       {:margin (em 0.3)}]]
 
@@ -112,6 +134,7 @@
       {:display :flex
        :flex-direction :column}
       [:.group
+       no-select
        {:display :flex
         :flex-direction :row
         :cursor :pointer
@@ -181,7 +204,20 @@
     [:.documentation
      {:grid-area :doc
       :font-family :monospace
-      :padding-top (em 0.5)}]]
+      :padding-top (em 0.5)}]
+
+    [:.empty
+     no-select
+     {:grid-column "1 / span 2"
+      :grid-row "1 / span 2"
+      :display :flex
+      :align-items :center
+      :justify-content :center
+      :height "100%"
+      :font-size (em 2.5)
+      :font-weight :bold
+      :font-style :italic
+      :color (color/rgba 0 0 0 0.15)}]]
 
    [:.editor-info
     {:display :grid
@@ -201,18 +237,60 @@
      [:.container
       {:font-family css.font/monospace
        :overflow-y :auto
-       :height (px info-height)}]]
+       :height (px info-height)}
+      [:.value
+       {:padding (em 0.3)}
+       ["&:nth-child(even)"
+        {:background-color (color/lighten css.color/green 15)}]]]
+     [:.empty
+      no-select
+      {:display :flex
+       :align-items :center
+       :justify-content :center
+       :height "100%"
+       :font-size (em 2.5)
+       :font-weight :bold
+       :font-style :italic
+       :color (color/rgba 0 0 0 0.15)}]]
     [:.stdout
      {:grid-area :stdout
       :background-color (color/lighten css.color/blue 35)}
      [:.container
       {:font-family css.font/monospace
        :overflow-y :auto
-       :height (px (/ info-height 2))}]]
+       :height (px (/ info-height 2))}
+      [:.value
+       {:padding (em 0.3)}
+       ["&:nth-child(even)"
+        {:background-color (color/lighten css.color/blue 30)}]]]
+     [:.empty
+      no-select
+      {:display :flex
+       :align-items :center
+       :justify-content :center
+       :height "100%"
+       :font-size (em 2.5)
+       :font-weight :bold
+       :font-style :italic
+       :color (color/rgba 0 0 0 0.15)}]]
     [:.stderr
      {:grid-area :stderr
       :background-color (color/lighten css.color/orange 30)}
      [:.container
       {:font-family css.font/monospace
        :overflow-y :auto
-       :height (px (/ info-height 2))}]]]))
+       :height (px (/ info-height 2))}
+      [:.value
+       {:padding (em 0.3)}
+       ["&:nth-child(even)"
+        {:background-color (color/lighten css.color/orange 25)}]]]
+     [:.empty
+      no-select
+      {:display :flex
+       :align-items :center
+       :justify-content :center
+       :height "100%"
+       :font-size (em 2.5)
+       :font-weight :bold
+       :font-style :italic
+       :color (color/rgba 0 0 0 0.15)}]]]))

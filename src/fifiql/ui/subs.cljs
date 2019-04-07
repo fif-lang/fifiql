@@ -45,3 +45,15 @@
  ::result-stderr
  (fn [db _]
    (:result-stderr db)))
+
+
+(re/reg-sub
+ ::toggle-stdlib?
+ (fn [db _]
+   (:toggle-stdlib? db)))
+
+
+(re/reg-sub
+ ::search-string
+ (fn [db _]
+   (:search-string db)))

@@ -8,7 +8,8 @@
 
 
 (defn base-layout []
-  (let [query-sform (re/subscribe [::ui.subs/editor-text])]
+  (let [query-sform (re/subscribe [::ui.subs/editor-text])
+        toggle-stdlib? (re/subscribe [::ui.subs/toggle-stdlib?])]
     (fn []
       [:<>
        [:div.sidebar-header
@@ -19,10 +20,13 @@
          {:on-click #(re/dispatch [::ui.events/run-query @query-sform])}
          "Run Query"]]
        [:div.sidebar
-        [:input.search-bar {:type "text"}]
+        [:input.search-bar
+         {:type "text"
+          :on-change #(re/dispatch [::ui.events/set-search-string (-> % .-target .-value)])}]
         [:div.stdlib-toggle
+         {:on-click #(re/dispatch [::ui.events/toggle-stdlib-words])}
          [:span "Show Stdlib Words"]
-         [:input {:type "checkbox"}]]
+         [:input {:type "checkbox" :checked @toggle-stdlib?}]]
         [sidebar/search-listing]]
        [:div.editor
         [editor/editor]]

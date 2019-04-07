@@ -15,24 +15,30 @@
 (defn stack-info []
   (let [result-stack (re/subscribe [::ui.subs/result-stack])]
     [:div.container
-     (doall
-      (for [value @result-stack]
-        [:div.value (pr-str value)]))]))
+     (if-not (empty? @result-stack)
+       (doall
+        (for [value @result-stack]
+          [:div.value {:key (str "stack-" value)} (pr-str value)]))
+       [:div.empty "STACK"])]))
 
 
 (defn stdout-info []
   (let [result-stdout (re/subscribe [::ui.subs/result-stdout])]
     [:div.container
-     (doall
-      (for [value-coll @result-stdout]
-        (for [value (str/split value-coll #"\n")]
-          [:div.value value])))]))
+     (if-not (empty? @result-stdout)
+       (doall
+        (for [value-coll @result-stdout]
+          (for [value (str/split value-coll #"\n")]
+            [:div.value {:key (str "stdout-" value)} value])))
+       [:div.empty "STDOUT"])]))
 
 
 (defn stderr-info []
   (let [result-stderr (re/subscribe [::ui.subs/result-stderr])]
     [:div.container
-     (doall
-      (for [value-coll @result-stderr]
-        (for [value (str/split value-coll #"\n")]
-          [:div.value value])))]))
+     (if-not (empty? @result-stderr)
+       (doall
+        (for [value-coll @result-stderr]
+          (for [value (str/split value-coll #"\n")]
+            [:div.value {:key (str "stderr-" value)} value])))
+       [:div.empty "STDERR"])]))
