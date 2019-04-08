@@ -10,7 +10,7 @@
 
 (defn group-listing [group words]
   (let [word-info (re/subscribe [::ui.subs/word-info])
-        open? (r/atom open?)]
+        open? (r/atom false)]
     (fn [group words]
       [:div.group-container {:key (str "container-" group)}
        [:div.group {:key (str "group-" group)
@@ -38,7 +38,9 @@
 
 (defn- process-word-listing [word-listing stdlib? search-string]
   (if stdlib?
-    (group-by :group word-listing)
+    (->> word-listing
+         (process-search-query search-string)
+         (group-by :group))
     (->> word-listing
          (filter #(not (:stdlib? %)))
          (process-search-query search-string)

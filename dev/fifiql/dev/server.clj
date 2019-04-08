@@ -29,11 +29,11 @@
 
       (fifql/set-word 'add2 (fifql/wrap-function 1 (fn [x] (+ 2 x)))
        :doc "(n -- n) Add 2 to the value"
-       :group :fifql/example)
+       :group :fifql.example)
 
       (fifql/set-var 'server-details {:server-port server-port :server-name server-name}
        :doc "The server details"
-       :group :fifql/example)))
+       :group :fifql.example)))
 
 
 ;; Create our ring request handler to use with Httpkit

@@ -16,15 +16,18 @@
                  [fif-lang/fifql    "1.3.2"]
                  [fif-lang/fifql-fx "1.3.2"]]
 
-  :plugins [[lein-cljsbuild "1.1.5"]
-            [lein-ancient "0.6.15"]]
+  :npm {:dependencies [[body-parser "1.18.3"]]
+        :devDependencies [[express "4.16.4"]]}
+
+  :repositories [["clojars" {:sign-releases false}]]
+  :clean-targets ^{:protect false} ["resources/public/js/compiled" "target"]
 
   :source-paths ["src"]
 
   :uberjar-name "fifiql-server.jar"
 
   :cljsbuild {:builds
-              [{:id "app"
+              [{:id "fifiql"
                 :source-paths ["src" "dev"]
                 :figwheel true
                 :compiler {:main fifiql.core
@@ -32,6 +35,15 @@
                            :output-to "resources/public/js/compiled/fifiql.js"
                            :output-dir "resources/public/js/compiled/out"
                            :optimizations :none
+                           :source-map-timestamp true}}
+               {:id "dev-server"
+                :source-paths ["src" "dev"]
+                :figwheel true
+                :compiler {:main fifiql.dev.server
+                           :output-to "target/compiled/dev-server.js"
+                           :output-dir "target/compiled/out"
+                           :optimizations :none
+                           :target :nodejs
                            :source-map-timestamp true}}]}
 
 
@@ -46,6 +58,7 @@
                    [http-kit "2.3.0"]]
     :plugins [[lein-cljsbuild "1.1.7"]
               [lein-figwheel "0.5.18"]
+              [lein-npm "0.6.2"]
               [lein-ancient "0.6.15"]]
     :repl-options {:init-ns fifiql.dev.user
                    :port 9005}}})
