@@ -16,7 +16,7 @@
    [fifql.core :as fifql]
 
    ;; Main
-   [fifiql.page]))
+   [fifiql.core :as fifiql]))
 
 
 (def server-name "A fifql Example Server")
@@ -47,7 +47,7 @@
   (GET "/" req "Hello World!")
   (GET "/fifql" req fifql-handler)
   (POST "/fifql" req fifql-handler)
-  (GET "/fifiql" req (fifiql.page/main)))
+  (GET "/fifiql" req (fifiql/handle-request)))
 
 
 (def site-config

@@ -4,7 +4,7 @@
    [fifql.core :as fifql]
    [fifql.server :refer [create-express-request-handler
                          add-request-middleware!]]
-   [fifiql.page]))
+   [fifiql.core :as fifiql]))
 
 
 (def express (js/require "express"))
@@ -36,7 +36,7 @@
 
 (defn fifiql-handler
   [request response]
-  (.send response (fifiql.page/main)))
+  (.send response (fifiql/handle-request)))
 
 
 (doto app

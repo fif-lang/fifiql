@@ -6,7 +6,7 @@
       :cljs [hiccups.runtime])))
 
 
-(defn main []
+(defn main [fifiql-source-path]
   (html
    [:html
     [:head
@@ -19,5 +19,5 @@
      [:div#app
       [:div.loading
        [:span "Loading..."]]]
-     [:script {:type "text/javascript" :src "/js/compiled/fifiql.js"}]
+     [:script {:type "text/javascript" :src fifiql-source-path}]
      [:script {:type "text/javascript"} "fifiql.core.init();"]]]))
