@@ -20,4 +20,4 @@
       [:div.loading
        [:span "Loading..."]]]
      [:script {:type "text/javascript" :src fifiql-source-path}]
-     [:script {:type "text/javascript"} "fifiql.core.init();"]]]))
+     [:script {:type "text/javascript"} "fifiql.init.start();"]]]))

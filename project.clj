@@ -1,4 +1,4 @@
-(defproject fif-lang/fifiql "1.4.0"
+(defproject fif-lang/fifiql "1.4.1"
   :description "Fif Query Language Interactive Development Page"
   :url "http://github.com/fif-lang/fifiql"
   :license {:name "EPL-2.0 OR GPL-2.0-or-later WITH Classpath-exception-2.0"
@@ -30,7 +30,7 @@
               [{:id "fifiql"
                 :source-paths ["src" "dev"]
                 :figwheel true
-                :compiler {:main fifiql.core
+                :compiler {:main fifiql.init
                            :asset-path "/js/compiled/out"
                            :output-to "resources/public/js/compiled/fifiql.js"
                            :output-dir "resources/public/js/compiled/out"
