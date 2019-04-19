@@ -4,7 +4,7 @@
 
 
 
-(defn handle-request
+(defn ^:export handle-request
   "Main request handler for fifiql
 
   Optional Arguments:

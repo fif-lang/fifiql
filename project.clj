@@ -1,4 +1,4 @@
-(defproject fif-lang/fifiql "1.4.0-SNAPSHOT"
+(defproject fif-lang/fifiql "1.4.0"
   :description "Fif Query Language Interactive Development Page"
   :url "http://github.com/fif-lang/fifiql"
   :license {:name "EPL-2.0 OR GPL-2.0-or-later WITH Classpath-exception-2.0"
