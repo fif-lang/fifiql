@@ -3,6 +3,8 @@
    [clojure.string :as str]
    [re-frame.core :as re]
    [reagent.core :as r]
+   [markdown.core :as markdown]
+
    [fifiql.ui.subs :as ui.subs]
    [fifiql.ui.events :as ui.events]
    [fifiql.ui.utf :refer [icon-unexpand icon-expand]]))
@@ -66,5 +68,5 @@
         [:<>
          [:div.name (pr-str (:name @word-meta))]
          [:div.group (pr-str (:group @word-meta))]
-         [:div.documentation (:doc @word-meta)]]
+         [:div.documentation {:dangerouslySetInnerHTML {:__html (-> @word-meta :doc markdown/md->html)}}]]
         [:div.empty "Word Info"]))))

@@ -1,4 +1,4 @@
-(defproject fif-lang/fifiql "1.4.1"
+(defproject fif-lang/fifiql "1.5.0-SNAPSHOT"
   :description "Fif Query Language Interactive Development Page"
   :url "http://github.com/fif-lang/fifiql"
   :license {:name "EPL-2.0 OR GPL-2.0-or-later WITH Classpath-exception-2.0"
@@ -10,6 +10,7 @@
                  [garden "1.3.6"]
                  [hiccup "1.0.5"]
                  [hiccups "0.3.0"]
+                 [markdown-clj "1.10.0"]
 
                  ;; fif libraries
                  [fif-lang/fif      "1.4.0"]
