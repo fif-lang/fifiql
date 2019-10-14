@@ -23,6 +23,75 @@
 (def server-port 8080)
 
 
+(def doc-markdown-test
+  "( -- ) Here is a markdown test
+
+# Heading
+
+## Sub Heading
+
+## Even More Sub Heading
+
+***
+
+*Emphasis!*
+
+_Italics_
+
+**Strong**
+
+__bold__
+
+***bold italic***
+
+> Here is a blockquote describing something
+
+> I think rats have a nice and distinctive taste
+>- Einstein
+
+* List Item 1
+  * Sub List Item 1
+* List Item 2
+
+1. Item 1
+2. Item 2
+
+Here is some `inlined` code for `you`
+
+Here is a codeblock
+```clojure
+
+(println \"Hello World!\")
+
+```
+
+~~strikethrough~~
+
+a^2 + b^2 = c^2
+
+[github](https://github.com)
+
+This is [an example][id] reference-style link.
+
+[id]: http://example.com/  \"Optional Title Here\"
+
+![Alt text](https://i.imgur.com/OM1jAhs.gif)
+
+| First Header  | Second Header |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
+
+| Left-Aligned  | Center Aligned    | Right Aligned |
+| :------------ | :---------------: | ------------: |
+| col 3 is      |  some wordy text  | $1600         |
+| col 2 is      |  centered         |   $12         |
+| zebra stripes |  are neat         |    $1         |
+")
+
+(def markdown-test "This is a markdown test word")
+
+
 ;; Create our stack machine, and define some word functions
 (def stack-machine
   (-> (fifql/create-stack-machine)
@@ -33,6 +102,10 @@
 
       (fifql/set-var 'server-details {:server-port server-port :server-name server-name}
        :doc "The server details"
+       :group :fifql.example)
+
+      (fifql/set-var 'markdown-test {:server-port server-port :server-name server-name}
+       :doc doc-markdown-test
        :group :fifql.example)))
 
 

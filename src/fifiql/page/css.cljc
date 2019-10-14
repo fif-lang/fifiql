@@ -185,14 +185,17 @@
      :grid-template-rows "2em 1fr"
      :grid-template-columns "minmax(1fr, 2fr) minmax(1fr, 2fr)"
      :background-color (color/lighten css.color/orange 20)
-     :padding [[(em 0.5) (em 1.0)]]}
+     :padding [[(em 0.5) (em 1.0)]]
+     :overflow-y :auto}
+    
+
     [:.name
      {:display :flex
       :align-items :center
       :grid-area :name
       :font-family css.font/serif
       :font-weight :bold
-      :font-size (em 1.2)}]
+      :font-size (em 1.5)}]
 
     [:.group
      {:display :flex
@@ -204,7 +207,54 @@
     [:.documentation
      {:grid-area :doc
       :font-family :monospace
-      :padding-top (em 0.5)}]
+      :padding-top (em 0.5)}
+     [:h1 {:font-size (em 1.4) :padding [[(em 0.5) 0]]}]
+     [:h2 {:font-size (em 1.2) :padding [[(em 0.3) 0]]}]
+     [:h3 {:font-size (em 1.1) :padding [[(em 0.1) 0]]}]
+     [:hr {:margin [[(em 1) 0]]}]
+     [:blockquote
+      {:padding (em 0.5)
+       :margin [[(em 0.5) 0]]
+       :background-color (color/lighten css.color/orange 25)
+       :border [[(px 1) :solid (color/lighten css.color/orange 30)]]}
+      [:footer
+       {:opacity 0.8
+        :font-style :italic}
+       [:&:before
+        {:content "\"~\""}]]]
+     [:ul
+      {:margin [[(em 0.5) (em 1.5)]]}
+      [:li
+       {:margin [[(em 0.5) 0 0 (em 0.3)]]}]]
+     [:ol
+      {:margin [[(em 0.5) (em 1.5)]]}
+      [:li
+       {:margin [[(em 0.5) 0 0 (em 0.3)]]}]]
+     [:p
+      {:line-height (em 1.2)
+       :margin [[(em 0.5) 0]]}
+      [:code
+       {:background-color (color/lighten css.color/orange 25)
+        :color css.color/blue}]
+      [:img
+       {:max-width "100%"
+        :height :auto
+        :text-align :center}]]
+     [:pre
+      {:padding (em 0.5)
+       :margin [[(em 0.5) 0]]
+       :background-color (color/lighten css.color/green 25)
+       :border [[(px 1) :solid (color/lighten css.color/green 30)]]}]
+     [:table
+      {:width "100%"
+       :margin [[(em 0.5) 0]]}
+      [:thead {}
+       [:tr {}
+        [:th {:text-align :left
+              :padding [[0 (em 0.5)]]}]]]
+      [:tbody {}
+       [:tr {}
+        [:td {:padding [[0 (em 0.5)]]}]]]]]
 
     [:.empty
      no-select
